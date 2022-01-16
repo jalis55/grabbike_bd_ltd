@@ -1,0 +1,39 @@
+{% extends 'auth_templates/base.html' %}
+
+{% block title %}Log in {% endblock %}
+
+{% block form %}
+{% with message=get_flashed_messages() %}
+{% if message %}
+<div class="alert alert-warning" role="alert">
+
+        {% for msg in message %}
+        <p>{{msg}}</p>
+        {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<form class="needs-validation" action="{{url_for('login_check')}}" novalidate method="POST">
+
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
+            {{form.email(placeholder='Email',class='form-control' )}}
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+        <div class="invalid-feedback">
+            Please enter email
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        <button type="submit" class="btn btn-outline-primary col-11 mx-auto">Login</button>
+    </div>
+
+
+
+</form>
+{% endblock %}

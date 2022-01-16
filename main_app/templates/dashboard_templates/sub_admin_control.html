@@ -1,0 +1,54 @@
+{% extends 'dashboard_templates/dash_base.html'%}
+{% block content %}
+<div class="content mt-3">
+
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">Table Head</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody id='tb'>
+                    {% for admin in admins %}
+                    <tr>
+                        
+                        <td>{{admin.name}}</td>
+                        <td>{{admin.email}}</td>
+                        {% if admin.approve_status %}
+                            <td>Approved</td>
+                        {% else %}
+                            <td>Unapproved</td>
+                        {% endif %}
+                        <td>
+                            {% if admin.approve_status %}
+                                <a href="/edit-subadmin/{{admin.id}}">Unapprove</a>
+                            {% else %}
+                                <a href="/edit-subadmin/{{admin.id}}">Approve</a>
+                            {% endif %}
+                            <a href="/delete-subadmin/{{admin.id}}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+{% endblock %}

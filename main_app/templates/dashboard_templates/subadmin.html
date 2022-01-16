@@ -1,0 +1,66 @@
+{% extends 'dashboard_templates/dash_base.html'%}
+{% block content %}
+<div class="content mt-3">
+<div class="well">
+    <form action={{url_for('add_subadmin')}} method="POST">
+        <!--First Name-->
+        <div class="form-group">
+        <label class="sr-only" for="name"></label>
+        <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name">
+        </div>
+        <!--Last Name-->
+        <div class="form-group">
+        <label class="sr-only" for="email"></label>
+        <input type="text" name="email" class="form-control" id="email" placeholder="Enter Email">
+        </div>
+        
+        <!--Submit Button-->
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </br>
+        <div id="output"></div>
+        </br>
+</div>
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">Table Head</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id='tb'>
+                    {% for admin in admins %}
+                    <tr>
+                        
+                        <td>{{admin.name}}</td>
+                        <td>{{admin.email}}</td>
+                        <td>
+                            {% if admin.approve_status %}
+                                approved
+                            {% else %}
+                                pending
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+{% endblock %}
